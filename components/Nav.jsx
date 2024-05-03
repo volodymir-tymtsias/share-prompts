@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
 import Image from 'next/image';
 import Link from 'next/link';
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 
 const Nav = () => {
   const { data: session } = useSession();
