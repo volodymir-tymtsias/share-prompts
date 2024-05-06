@@ -11,6 +11,9 @@ const PromptCard = ({
   handleEdit,
   handleDelete,
 }) => {
+  const { data: session } = useSession();
+  const pathName = usePathname();
+  const router = useRouter();
   const [copied, setCopied] = useState("");
 
   const getCopyImage = () => {
@@ -31,7 +34,7 @@ const PromptCard = ({
         <div className="flex flex-1 justify-start items-center gap-3 cursor-pointer">
           <Image
             src={post.creator?.image}
-            alt="user_image"
+            alt="user image"
             width={40}
             height={40}
             className="rounded-full object-contain"
@@ -50,6 +53,7 @@ const PromptCard = ({
         <div className="copy_btn" onClick={handleCopy}>
           <Image 
             src={getCopyImage()}
+            alt="copy/tick"
             width={12}
             height={12}
           />
@@ -65,6 +69,23 @@ const PromptCard = ({
       >
         {post.tag}
       </p>
+
+      {session?.user.id === post.creator._id && pathName === '/profile' && (
+        <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
+          <p
+            className="font-inter text-sm green_gradient cursor-pointer"
+            onClick={handleEdit}
+          >
+            Edit
+          </p>
+          <p
+            className="font-inter text-sm orange_gradient cursor-pointer"
+            onClick={handleDelete}
+          >
+            Delete
+          </p>
+        </div>
+      )}
     </div>
   )
 }
