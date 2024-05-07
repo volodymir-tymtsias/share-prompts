@@ -27,17 +27,42 @@ const Feed = () => {
     const data = await response.json();
 
     setAllPosts(data);
+    setVisiblePosts(data);
   };
 
   useEffect(() => {
     fetchPosts();
   }, []);
 
-  
+  const filterPrompts = (searchtext) => {
+    const regex = new RegExp(searchtext, "i"); // 'i' flag for case-insensitive search
+    return allPosts.filter(
+      (item) =>
+        regex.test(item.creator.username) ||
+        regex.test(item.tag) ||
+        regex.test(item.prompt)
+    );
+  };
 
   const handleSearchChange = (e) => {
+    clearTimeout(searchTimeout);
     setSearchText(e.target.value);
-  }
+
+    // debounce method
+    setSearchTimeout(
+      setTimeout(() => {
+        const searchResult = filterPrompts(e.target.value);
+        setVisiblePosts(searchResult);
+      }, 500)
+    );
+  };
+
+  const handleTagClick = (tagName) => {
+    setSearchText(tagName);
+
+    const searchResult = filterPrompts(tagName);
+    setVisiblePosts(searchResult);
+  };
 
   return (
     <section className="feed">
@@ -53,10 +78,10 @@ const Feed = () => {
 
       <PromptCardList
         data={visiblePosts}
-        handleTagClick={() => {}}
+        handleTagClick={handleTagClick}
       />
     </section>
-  )
+  );
 }
 
 export default Feed;
