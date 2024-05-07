@@ -39,7 +39,7 @@ const Form = ({
 
         <label>
           <span className="font-satoshi font-semibold text-base text-gray-700">
-            Field of Prompt{" "}
+            Tag{" "}
             <span className="font-normal">
               (#product, #webdevelopment, #idea, etc.)
             </span>
