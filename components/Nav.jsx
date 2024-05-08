@@ -21,7 +21,7 @@ const Nav = () => {
   }, []);
 
   const signOutAndCloseDropdawn = () => {
-    signOut();
+    signOut({ callbackUrl: '/' });
     setDropdownIsOpen(false);
   };
 
@@ -53,7 +53,7 @@ const Nav = () => {
             <button 
               type="button"
               className="outline_btn"
-              onClick={signOut}
+              onClick={signOutAndCloseDropdawn}
             >
               Sign Out
             </button>
