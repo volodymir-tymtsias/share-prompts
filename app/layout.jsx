@@ -5,6 +5,9 @@ import '@styles/globals.css';
 export const metadata = {
   title: 'Share prompts',
   description: 'Discover & Share AI Prompts',
+  icons: {
+    icon: '/assets/icons/favicon.ico', // /public path
+  },
 }
 
 const RootLayout = ({ children }) => {
